@@ -2,26 +2,27 @@
 " ===================================
 syntax on
 
-highlight Normal ctermbg=Black ctermfg=Cyan
+highlight Normal ctermbg=Black ctermfg=White
 highlight Comment ctermbg=Black ctermfg=Green
-highlight Constant ctermbg=Black ctermfg=Cyan
-highlight NonText ctermbg=Black ctermfg=DarkBlue
-highlight Special ctermbg=Black ctermfg=Blue
+highlight Constant ctermbg=Black ctermfg=11
+highlight NonText ctermbg=Black ctermfg=Cyan
+highlight Special ctermbg=Black ctermfg=Cyan
 highlight Cursor ctermbg=Yellow ctermfg=DarkYellow
 highlight Visual ctermbg=Cyan ctermfg=Black
 " -----------------------------------------------
+highlight String ctermfg=202
+highlight Title ctermfg=231
 " some new stuff:
 "highlight Identifier ctermbg=Red ctermfg=Black
 highlight Repeat cterm=bold ctermbg=Black ctermfg=92
 highlight Function cterm=bold ctermfg=Yellow
-highlight Operator ctermfg=Green
+highlight Operator ctermfg=White
 highlight LineNr ctermfg=LightBlue
 highlight MatchParen ctermbg=Yellow ctermfg=5
 highlight Pmenu ctermbg=Yellow ctermfg=5
 highlight PmenuSel ctermbg=5 ctermfg=Yellow
 highlight PmenuSbar ctermbg=LightBlue ctermfg=Blue
 highlight PmenuThumb ctermbg=Blue ctermfg=LightBlue 
-
 
 " testing
 " --------------
@@ -32,7 +33,13 @@ highlight PreProc ctermbg=Black ctermfg=5
 highlight Type ctermbg=Black ctermfg=69
 
 set colorcolumn=100 
-highlight ColorColumn ctermbg=Yellow  " highlight column number 100 
+highlight ColorColumn ctermbg=Yellow ctermfg=Black " highlight column number 100 
+
+" JS COLOR SETTINGS :
+" ==========================================
+highlight jsObjectProp ctermbg=Black ctermfg=43
+highlight jsFuncCall ctermbg=Black ctermfg=135 cterm=bold
+
 
 " ===================================
 set t_Co=256
@@ -72,8 +79,8 @@ set nofoldenable       " Don't fold by default
 " Completion
 " ========================
 set wildmode=longest,list,full
-set wildmenu				      " Enable ctrl-n and ctrl-p to scroll (ctrl-n remapped)
-set wildignore=*.o,*.obj,*~		  " Stuff to ignore when tab completing
+set wildmenu               " Enable ctrl-n and ctrl-p to scroll (ctrl-n remapped)
+set wildignore=*.o,*.obj,*~ " Stuff to ignore when tab completing
 set wildignore+=*vim/backups*
 
 " Scrolling
@@ -91,7 +98,7 @@ map <leader>rf :source ~/.vimrc<CR>
 noremap <leader>s :update<CR>
 " ctrl-n => open NERDTree
 map <C-n> :NERDTreeToggle<CR>
-
+map <leader>hg :so $VIMRUNTIME/syntax/hitest.vim<CR>
 " ==============================================
 " So much for now...
 
@@ -118,6 +125,14 @@ filetype plugin on
 
 " Pathogen plugin exe
 execute pathogen#infect() 
+
+
+" Autocomplete HTML
+" ====================================
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+
+
 
 "     THEME PART - still not sure about this
 "let g:thematic#themes = {
@@ -192,12 +207,4 @@ execute pathogen#infect()
 " ... there's more...
 " ===========================================
 
-function! PhpSyntaxOverride()
-	  hi! def link phpDocTags  phpDefine
-	    hi! def link phpDocParam phpType
-	endfunction
 
-	augroup phpSyntaxOverride
-		  autocmd!
-		    autocmd FileType php call PhpSyntaxOverride()
-		augroup END

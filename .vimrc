@@ -39,7 +39,7 @@ highlight ColorColumn ctermbg=Yellow ctermfg=Black " highlight column number 100
 " ==========================================
 highlight jsObjectProp ctermbg=Black ctermfg=43
 highlight jsFuncCall ctermbg=Black ctermfg=135 cterm=bold
-
+highlight jsThis ctermbg=black ctermfg=208 cterm=bold 
 
 " ===================================
 set t_Co=256
